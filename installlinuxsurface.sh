@@ -4,24 +4,21 @@
 
 set -e
 
-if [ "$(whoami)" != "sudo" ]; then
-  echo "This script must be run by sudo."
-  exit 1
-fi
+# Import the keys
+wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
+    | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/linux-surface.gpg
 
-# Add Linux Surface repository
-sudo curl -fsSL https://linux-surface.github.io/linux-surface/linux-surface.key | gpg --dearmor -o /usr/share/keyrings/linux-surface.gpg
-
-echo "deb [signed-by=/usr/share/keyrings/linux-surface.gpg] https://linux-surface.github.io/linux-surface/apt/ release main" > /etc/apt/sources.list.d/linux-surface.list
+echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" \
+	| sudo tee /etc/apt/sources.list.d/linux-surface.list
 
 # Update package lists
 sudo apt update
 
 # Install Surface kernel and headers
-sudo apt install -y linux-image-surface linux-headers-surface iptsd libwacom-surface
+sudo apt install linux-image-surface linux-headers-surface libwacom-surface iptsd
 
-# Install surface-control (optional, for battery/keyboard/touchpad)
-sudo apt install -y surface-control
+# Install our secureboot key
+sudo apt install linux-surface-secureboot-mok
 
 # Update GRUB
 sudo update-grub
