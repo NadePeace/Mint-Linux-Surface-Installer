@@ -25,9 +25,9 @@ sudo apt install linux-surface-secureboot-mok
 sudo update-grub
 
 # Prompt for reboot
-read -p "Installation complete. Reboot now? [Y/n]: " answer
+read -p $'\e[32mInstallation complete. Reboot now? [Y/n]: \e[0m' answer
 if [[ $answer =~ ^[Yy]$ || -z $answer ]]; then
   sudo reboot now
 else
-  echo "Please reboot manually to use the Surface kernel."
+  echo -e "\e[33mPlease reboot manually to use the Surface kernel.\e[0m"
 fi
