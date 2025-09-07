@@ -12,13 +12,13 @@ wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/
 echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" \
 	| sudo tee /etc/apt/sources.list.d/linux-surface.list
 
-# Update package lists
+# Update package list
 sudo apt update
 
 # Install Surface kernel and headers
 sudo apt install linux-image-surface linux-headers-surface libwacom-surface iptsd
 
-# Install our secureboot key
+# Install the secureboot key
 sudo apt install linux-surface-secureboot-mok
 
 # Update GRUB
