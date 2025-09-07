@@ -4,6 +4,11 @@
 
 set -e
 
+if [ "$(whoami)" != "sudo" ]; then
+  echo "This script must be run by sudo."
+  exit 1
+fi
+
 # Add Linux Surface repository
 sudo curl -fsSL https://linux-surface.github.io/linux-surface/linux-surface.key | gpg --dearmor -o /usr/share/keyrings/linux-surface.gpg
 
