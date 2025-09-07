@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Script to install Linux Surface support on Linux Mint
 # https://github.com/linux-surface/linux-surface
 
